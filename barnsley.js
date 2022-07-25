@@ -3,9 +3,16 @@ class Barnsley {
     this.x = 0;
     this.y = 0;
     this.callCount = 0;
-    this.xStart = xStart;
-    this.yStart = yStart;
+    this.xStart = xStart - size / 2;
+    this.yStart = yStart - size;
     this.size = size;
+  }
+
+  checkCount() {
+    if (this.callCount < this.size) {
+      return true;
+    }
+    return false;
   }
 
   nextPoint() {
