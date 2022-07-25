@@ -1,21 +1,25 @@
 class Barnsley {
-  constructor(xStart, yStart, size) {
+  constructor(xStart, yStart, size, dir1) {
     this.x = 0;
     this.y = 0;
     this.callCount = 0;
     this.xStart = xStart - size / 2;
     this.yStart = yStart - size;
     this.size = size;
+    this.dir1 = dir1;
+    this.dir2 = dir1 * -1;
+    this.stroke = [12, random(255), 12];
   }
 
   checkCount() {
-    if (this.callCount < this.size) {
+    if (this.callCount < this.size * 50) {
       return true;
     }
     return false;
   }
 
   nextPoint() {
+    console.log(this.dir1, this.dir2);
     this.callCount += 1;
 
     let nextX;
@@ -41,7 +45,14 @@ class Barnsley {
   }
 
   drawPoint() {
-    let px = map(this.x, -2.182, 2.6558, this.xStart, this.xStart + this.size);
+    // let px = map(this.x, -2.182, 2.6558, this.xStart, this.xStart + this.size);
+    let px = map(
+      this.x,
+      this.dir1,
+      this.dir2,
+      this.xStart,
+      this.xStart + this.size
+    );
     let py = map(this.y, 0, 9.9983, this.yStart + this.size, this.yStart);
     point(px, py);
   }
